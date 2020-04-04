@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlabberApp.Domain\BlabberApp.Domain.csproj" />
+    <ProjectReference Include="..\BlabberApp.Services\BlabberApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

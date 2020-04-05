@@ -10,7 +10,7 @@ namespace BlabberApp.DataStore.Plugins {
     public class MySqlBlab : IBlabPlugin {
         MySqlConnection dcBlab;
         public MySqlBlab() {
-            this.dcBlab = new MySqlConnection("server=142.93.114.73;database=kadenlovell;user=kadenlovell;password=letmein");
+            this.dcBlab = new MySqlConnection("server=localhost;database=KadenLovell;user=root;password=12oakcrest");
             try {
                 this.dcBlab.Open();
             } catch (Exception ex) {

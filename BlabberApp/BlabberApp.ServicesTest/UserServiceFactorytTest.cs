@@ -6,30 +6,25 @@ using BlabberApp.DataStore.Plugins;
 using BlabberApp.Domain.Entities;
 using BlabberApp.Services;
 
-namespace BlabberApp.ServicesTest
-{
+namespace BlabberApp.ServicesTest {
     [TestClass]
-    public class UserServiceFactoryTest
-    {
+    public class UserServiceFactoryTest {
         UserServiceFactory harness = new UserServiceFactory();
 
         [TestMethod]
-        public void CanaryTest()
-        {
+        public void CanaryTest() {
             Assert.AreEqual(true, true);
         }
 
         [TestMethod]
-        public void BuildAdapterPluginTest()
-        {
+        public void BuildAdapterPluginTest() {
             //Arrange and Act
             UserAdapter userAdapter = harness.BuildUserAdapter();
             //Assert
             Assert.IsTrue(userAdapter is UserAdapter);
         }
         [TestMethod]
-        public void BuildServiceAdapterPluginTest()
-        {
+        public void BuildServiceAdapterPluginTest() {
             //Arrange and Act
             UserService userService = harness.BuildUserService();
             //Assert

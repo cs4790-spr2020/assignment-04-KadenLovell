@@ -3,7 +3,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BlabberApp.DataStore\BlabberApp.DataStore.csproj" />
     <ProjectReference Include="..\BlabberApp.Domain\BlabberApp.Domain.csproj" />
-    <ProjectReference Include="..\BlabberApp.Services\BlabberApp.Services.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

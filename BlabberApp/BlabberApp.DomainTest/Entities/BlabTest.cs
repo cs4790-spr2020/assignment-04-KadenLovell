@@ -2,21 +2,17 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BlabberApp.Domain.Entities;
 
-namespace BlabberApp.DomainTest.Entities
-{
+namespace BlabberApp.DomainTest.Entities {
     [TestClass]
-    public class BlabTest
-    {       
+    public class BlabTest {
         private Blab harness;
-        public BlabTest() 
-        {
+        public BlabTest() {
             harness = new Blab();
         }
         [TestMethod]
-        public void TestSetGetMessage()
-        {
+        public void TestSetGetMessage() {
             // Arrange
-            string expected = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."; 
+            string expected = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
             harness.Message = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
             // Act
             string actual = harness.Message;
@@ -25,8 +21,7 @@ namespace BlabberApp.DomainTest.Entities
         }
 
         [TestMethod]
-        public void TestId()
-        {
+        public void TestId() {
             // Arrange
             Guid expected = harness.Id;
             // Act
@@ -35,10 +30,9 @@ namespace BlabberApp.DomainTest.Entities
             Assert.AreEqual(actual, expected);
             Assert.AreEqual(true, harness.Id is Guid);
         }
-        
+
         [TestMethod]
-        public void TestDTTM()
-        {
+        public void TestDTTM() {
             // Arrange
             Blab Expected = new Blab();
             // Act

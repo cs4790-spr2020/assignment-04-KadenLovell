@@ -5,20 +5,16 @@ using BlabberApp.DataStore.Adapters;
 using BlabberApp.DataStore.Plugins;
 using BlabberApp.Domain.Entities;
 
-namespace BlabberApp.ServicesTest
-{
+namespace BlabberApp.ServicesTest {
     [TestClass]
-    public class UserServicesTest
-    {
+    public class UserServicesTest {
         [TestMethod]
-        public void Canary()
-        {
+        public void Canary() {
             Assert.AreEqual(true, true);
         }
 
         [TestMethod]
-        public void GetAllEmpty()
-        {
+        public void GetAllEmpty() {
             //Arrange
             InMemory plugin = new InMemory();
             UserAdapter adapter = new UserAdapter(plugin);

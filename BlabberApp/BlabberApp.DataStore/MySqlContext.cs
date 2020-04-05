@@ -8,7 +8,7 @@ namespace BlabberApp.DataStore.Plugins {
         public DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseMySQL("server=142.93.114;database=kadenlovell;user=kadenlovell;password=letmein");
+            optionsBuilder.UseMySQL("server=142.93.114.73;database=kadenlovell;user=kadenlovell;password=letmein");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

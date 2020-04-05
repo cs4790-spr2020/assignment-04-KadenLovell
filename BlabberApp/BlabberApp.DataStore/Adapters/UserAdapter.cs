@@ -3,45 +3,36 @@ using System.Collections;
 using BlabberApp.DataStore.Interfaces;
 using BlabberApp.Domain.Entities;
 
-namespace BlabberApp.DataStore.Adapters
-{
-    public class UserAdapter
-    {
-       private IUserPlugin plugin;
+namespace BlabberApp.DataStore.Adapters {
+    public class UserAdapter {
+        private IUserPlugin plugin;
 
-       public UserAdapter(IUserPlugin plugin)
-       {
-           this.plugin = plugin;
-       }
+        public UserAdapter(IUserPlugin plugin) {
+            this.plugin = plugin;
+        }
 
-       public void Add(User user)
-       {
-           this.plugin.Create(user);
-       }
+        public void Add(User user) {
+            this.plugin.Create(user);
+        }
 
-       public void Remove(User user)
-       {
-           this.plugin.Delete(user);
-       }
+        public void Remove(User user) {
+            this.plugin.Delete(user);
+        }
 
-       public void Update(User user)
-       {
-           this.plugin.Update(user);
-       }
+        public void Update(User user) {
+            this.plugin.Update(user);
+        }
 
-       public IEnumerable GetAll()
-       {
-           return this.plugin.ReadAll();
-       }
+        public IEnumerable GetAll() {
+            return this.plugin.ReadAll();
+        }
 
-       public User GetById(Guid Id)
-       {
-           return (User)this.plugin.ReadById(Id);
-       }
+        public User GetById(Guid Id) {
+            return (User)this.plugin.ReadById(Id);
+        }
 
-       public User GetByEmail(string email)
-       {
-           return (User)this.plugin.ReadByUserEmail(email);
-       }
+        public User GetByEmail(string email) {
+            return (User)this.plugin.ReadByUserEmail(email);
+        }
     }
 }

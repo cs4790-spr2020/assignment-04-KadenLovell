@@ -1,9 +1,7 @@
 using System;
 
-namespace BlabberApp.WebApi
-{
-    public class WeatherForecast
-    {
+namespace BlabberApp.WebApi {
+    public class WeatherForecast {
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

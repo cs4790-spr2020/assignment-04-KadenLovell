@@ -4,22 +4,18 @@ using BlabberApp.DataStore.Adapters;
 using BlabberApp.DataStore.Plugins;
 using BlabberApp.Domain.Entities;
 
-namespace BlabberApp.DataStoreTest
-{
+namespace BlabberApp.DataStoreTest {
     [TestClass]
-    public class BlabAdapter_MySql_UnitTests
-    {
+    public class BlabAdapter_MySql_UnitTests {
         private BlabAdapter _harness = new BlabAdapter(new MySqlBlab());
 
         [TestMethod]
-        public void Canary()
-        {
+        public void Canary() {
             Assert.AreEqual(true, true);
         }
 
         [TestMethod]
-        public void TestAddAndGetBlab()
-        {
+        public void TestAddAndGetBlab() {
             //Arrange
             string email = "fooabar@example.com";
             User mockUser = new User(email);

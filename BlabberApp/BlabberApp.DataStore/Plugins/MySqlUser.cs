@@ -6,32 +6,23 @@ using BlabberApp.DataStore.Interfaces;
 using BlabberApp.Domain.Entities;
 using BlabberApp.Domain.Interfaces;
 
-namespace BlabberApp.DataStore.Plugins
-{
-    public class MySqlUser : IUserPlugin
-    {
+namespace BlabberApp.DataStore.Plugins {
+    public class MySqlUser : IUserPlugin {
         MySqlConnection dcUser;
-        public MySqlUser()
-        {
+        public MySqlUser() {
             this.dcUser = new MySqlConnection("server=142.93.114.73;database=donbstringham;user=donbstringham;password=letmein");
-            try
-            {
+            try {
                 this.dcUser.Open();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
         }
-        public void Close()
-        {
+        public void Close() {
             this.dcUser.Close();
         }
-        public void Create(IEntity obj)
-        {
+        public void Create(IEntity obj) {
             User user = (User)obj;
-            try
-            {
+            try {
                 DateTime now = DateTime.Now;
                 string sql = "INSERT INTO users (sys_id, email, dttm_registration, dttm_last_login) VALUES ('"
                      + user.Id + "', '"
@@ -40,22 +31,17 @@ namespace BlabberApp.DataStore.Plugins
                      + "', '" + now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
                 MySqlCommand cmd = new MySqlCommand(sql, this.dcUser);
                 cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
         }
 
-        public IEnumerable ReadAll()
-        {
+        public IEnumerable ReadAll() {
             return null;
         }
 
-        public IEntity ReadById(Guid Id)
-        {
-            try
-            {
+        public IEntity ReadById(Guid Id) {
+            try {
                 string sql = "SELECT * FROM users WHERE users.sys_id = '" + Id.ToString() + "'";
                 MySqlDataAdapter daUser = new MySqlDataAdapter(sql, this.dcUser); // To avoid SQL injection.
                 MySqlCommandBuilder cbUser = new MySqlCommandBuilder(daUser);
@@ -72,16 +58,12 @@ namespace BlabberApp.DataStore.Plugins
                 user.LastLoginDTTM = (DateTime)row["dttm_last_login"];
 
                 return user;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
         }
-        public IEntity ReadByUserEmail(string Id)
-        {
-            try
-            {
+        public IEntity ReadByUserEmail(string Id) {
+            try {
                 string sql = "SELECT * FROM users WHERE users.email = '" + Id.ToString() + "'";
                 MySqlDataAdapter daUser = new MySqlDataAdapter(sql, this.dcUser); // To avoid SQL injection.
                 MySqlCommandBuilder cbUser = new MySqlCommandBuilder(daUser);
@@ -98,20 +80,16 @@ namespace BlabberApp.DataStore.Plugins
                 user.LastLoginDTTM = (DateTime)row["dttm_last_login"];
 
                 return user;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
         }
 
-        public void Update(IEntity obj)
-        {
+        public void Update(IEntity obj) {
             User user = (User)obj;
         }
 
-        public void Delete(IEntity obj)
-        {
+        public void Delete(IEntity obj) {
             User user = (User)obj;
         }
     }

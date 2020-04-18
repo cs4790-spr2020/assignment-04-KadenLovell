@@ -19,14 +19,14 @@ namespace BlabberApp.ServicesTest {
         [TestMethod]
         public void BuildAdapterPluginTest() {
             //Arrange and Act
-            UserAdapter userAdapter = harness.BuildUserAdapter();
+            UserAdapter userAdapter = harness.CreateUserAdapter();
             //Assert
             Assert.IsTrue(userAdapter is UserAdapter);
         }
         [TestMethod]
         public void BuildServiceAdapterPluginTest() {
             //Arrange and Act
-            UserService userService = harness.BuildUserService();
+            UserService userService = harness.CreateUserService();
             //Assert
             Assert.IsTrue(userService is UserService);
         }

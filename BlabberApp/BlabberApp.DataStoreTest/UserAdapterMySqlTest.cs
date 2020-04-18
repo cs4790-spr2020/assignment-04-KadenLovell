@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BlabberApp.DataStore.Adapters;
 using BlabberApp.DataStore.Plugins;
@@ -7,7 +8,21 @@ using BlabberApp.Domain.Entities;
 namespace BlabberApp.DataStoreTest {
     [TestClass]
     public class UserAdapter_MySql_UnitTests {
-        private UserAdapter _harness = new UserAdapter(new MySqlUser());
+        private User _user;
+        private UserAdapter _harness;
+        private readonly string _email = "foobar@example.com";
+
+        [TestInitialize]
+        public void Setup() {
+            _user = new User(_email);
+            _harness = new UserAdapter(new MySqlUser());
+            _harness.RemoveAll();
+        }
+        [TestCleanup]
+        public void TearDown() {
+            User user = new User(_email);
+            _harness.RemoveAll();
+        }
 
         [TestMethod]
         public void Canary() {
@@ -17,15 +32,25 @@ namespace BlabberApp.DataStoreTest {
         [TestMethod]
         public void TestAddAndGetUser() {
             //Arrange
-            User user = new User("foobar@example.com");
-            user.RegisterDTTM = DateTime.Now;
-            user.LastLoginDTTM = DateTime.Now;
-            Console.WriteLine(user.Id.ToString());
+            _user.RegisterDTTM = DateTime.Now;
+            _user.LastLoginDTTM = DateTime.Now;
             //Act
-            _harness.Add(user);
-            User actual = _harness.GetById(user.Id);
+            _harness.Add(_user);
+            User actual = _harness.GetById(_user.Id);
             //Assert
-            Assert.AreEqual(user.Id, actual.Id);
+            Assert.AreEqual(_user.Id, actual.Id);
+        }
+        [TestMethod]
+        public void TestAddAndGetAll() {
+            //Arrange
+            _user.RegisterDTTM = DateTime.Now;
+            _user.LastLoginDTTM = DateTime.Now;
+            _harness.Add(_user);
+            //Act
+            ArrayList users = (ArrayList)_harness.GetAll();
+            User actual = (User)users[0];
+            //Assert
+            Assert.AreEqual(_user.Id.ToString(), actual.Id.ToString());
         }
     }
 }

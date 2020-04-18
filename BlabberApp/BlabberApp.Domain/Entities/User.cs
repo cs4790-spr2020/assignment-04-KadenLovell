@@ -23,7 +23,7 @@ namespace BlabberApp.Domain.Entities {
             try {
                 MailAddress m = new MailAddress(email);
             } catch (FormatException) {
-                throw new FormatException("Email is invalid");
+                throw new FormatException(email + " is invalid");
             }
             Email = email;
         }

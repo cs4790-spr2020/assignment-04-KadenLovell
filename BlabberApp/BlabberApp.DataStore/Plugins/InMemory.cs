@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using BlabberApp.DataStore.Interfaces;
+using BlabberApp.Domain.Entities;
 using BlabberApp.Domain.Interfaces;
 
 namespace BlabberApp.DataStore.Plugins {
@@ -22,13 +23,18 @@ namespace BlabberApp.DataStore.Plugins {
             foreach (IEntity obj in this.buffer) {
                 if (Id.Equals(obj.Id)) return obj;
             }
-            return null;
+            throw new Exception("Not found");
         }
         public IEnumerable ReadByUserId(string Id) {
-            return null;
+            throw new Exception("Not found");
         }
         public IEntity ReadByUserEmail(string email) {
-            return null;
+            foreach (User user in buffer) {
+                if (user.Email.Equals(email)) {
+                    return user;
+                }
+            }
+            throw new Exception("Not found");
         }
 
         public void Update(IEntity obj) {
@@ -38,6 +44,9 @@ namespace BlabberApp.DataStore.Plugins {
 
         public void Delete(IEntity obj) {
             this.buffer.Remove(obj);
+        }
+        public void DeleteAll() {
+            this.buffer.Clear();
         }
     }
 }

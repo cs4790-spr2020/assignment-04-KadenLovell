@@ -1,12 +1,14 @@
 @page
-@model BlabberApp.Client.Pages.RegistrationModel
+@model BlabberApp.Client.Pages.RegisterModel
+@using BlabberApp.Services
+@inject IUserService UserService
 @{
-    ViewData["Title"] = "Registration";
+    ViewData["Title"] = "Register";
 }
+<h1>@ViewData["Title"]</h1>
 
-<section id="main">
-    <h1>Registration</h1>
-    <div id="content">
-        All the registration content will go here!
-    </div>
-</section>
+<form method="post">
+    <label>Email</label>
+    <input type="email" name="emailaddress">
+    <input type="submit">
+</form>

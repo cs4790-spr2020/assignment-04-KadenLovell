@@ -10,7 +10,7 @@ namespace BlabberApp.DataStore.Plugins {
     public class MySqlBlab : IBlabPlugin {
         MySqlConnection dcBlab;
         public MySqlBlab() {
-            this.dcBlab = new MySqlConnection("server=localhost;database=KadenLovell;user=root;password=12oakcrest");
+            this.dcBlab = new MySqlConnection("server=142.93.114.73;database=donbstringham;user=donbstringham;password=letmein");
             try {
                 this.dcBlab.Open();
             } catch (Exception ex) {
@@ -26,7 +26,7 @@ namespace BlabberApp.DataStore.Plugins {
                 DateTime now = DateTime.Now;
                 string sql = "INSERT INTO blabs (sys_id, message, dttm_created, user_id) VALUES ('"
                      + blab.Id + "', '"
-                     + blab.Message + "', '"
+                     + MySql.Data.MySqlClient.MySqlHelper.EscapeString(blab.Message) + "', '"
                      + now.ToString("yyyy-MM-dd HH:mm:ss") + "', '"
                      + blab.User.Email + "')";
                 MySqlCommand cmd = new MySqlCommand(sql, this.dcBlab);
@@ -46,13 +46,13 @@ namespace BlabberApp.DataStore.Plugins {
 
                 daBlabs.Fill(dsBlabs);
 
-                ArrayList alBlabs = new ArrayList();
+                ArrayList blabs = new ArrayList();
 
                 foreach (DataRow dtRow in dsBlabs.Tables[0].Rows) {
-                    alBlabs.Add(dtRow);
+                    blabs.Add(DataRow2Blab(dtRow));
                 }
 
-                return alBlabs;
+                return blabs;
             } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
@@ -87,13 +87,13 @@ namespace BlabberApp.DataStore.Plugins {
 
                 daBlabs.Fill(dsBlabs);
 
-                ArrayList alBlabs = new ArrayList();
+                ArrayList blabs = new ArrayList();
 
                 foreach (DataRow dtRow in dsBlabs.Tables[0].Rows) {
-                    alBlabs.Add(dtRow);
+                    blabs.Add(DataRow2Blab(dtRow));
                 }
 
-                return alBlabs;
+                return blabs;
             } catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
@@ -105,6 +105,24 @@ namespace BlabberApp.DataStore.Plugins {
 
         public void Delete(IEntity obj) {
             Blab blab = (Blab)obj;
+        }
+        public void DeleteAll() {
+            string sql = "TRUNCATE TABLE blabs";
+            MySqlCommand cmd = new MySqlCommand(sql, this.dcBlab);
+            cmd.ExecuteNonQuery();
+        }
+        private Blab DataRow2Blab(DataRow row) {
+            User user = new User();
+
+            user.ChangeEmail(row["user_id"].ToString());
+
+            Blab blab = new Blab(user);
+
+            blab.Id = new Guid(row["sys_id"].ToString());
+            blab.Message = row["message"].ToString();
+            blab.DTTM = (DateTime)row["dttm_created"];
+
+            return blab;
         }
     }
 }
